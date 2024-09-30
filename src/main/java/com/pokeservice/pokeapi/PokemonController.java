@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pokemon")
-@CrossOrigin
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class PokemonController {
 
     private final PokemonService pokemonService;
@@ -61,7 +61,7 @@ public class PokemonController {
     }
 
     // Atualizar o treinador de um Pokémon por ID
-    @PatchMapping("/{id}/treinador")
+    @PutMapping("/{id}/treinador")
     public ResponseEntity<Pokemon> updatePokemonTrainer(@PathVariable("id") Integer id, @RequestBody String novoTreinador) {
         try {
             Optional<Pokemon> updatedPokemon = pokemonService.updatePokemonTrainer(id, novoTreinador);
